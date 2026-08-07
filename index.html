@@ -8,33 +8,60 @@
 <style>
 
 body {
-    font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
     background:#f2f2f7;
-    padding:10px;
+    padding:20px;
+    margin:0;
+    min-height:100vh;
+
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    background-position: top left;
 }
 
+/* Main container */
+.widgets {
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    box-sizing:border-box;
+}
+
+/* Widget cards */
 .widget {
-    background:#111;
+
+    background:
+        rgba(0,0,0,0.65);
+    backdrop-filter:
+            blur(12px);
+
     color:white;
+
     border-radius:24px;
-    padding:22px;
-    width:95%;
-    margin:20px 0;
+
+    padding:24px;
+
+    width:100%;
+    box-sizing:border-box;
+
 }
 
 .label {
     color:#aaa;
-    font-size:16px;
+    font-size:20px;
 }
 
 .big {
-    font-size:30px;
+    font-size:46px;
     font-weight:700;
     margin-top:12px;
 }
 
 .small {
-    font-size:18px;
+    font-size:22px;
     margin-top:10px;
 }
 
@@ -51,16 +78,80 @@ button {
     margin-top:10px;
 }
 
+/* Top clock layout */
 .clock-widget {
+
     display:flex;
     align-items:center;
-    gap:20px;
+    justify-content:center;
+
+    gap:40px;
+
+    min-height:180px;
+
 }
 
+
+
+/* Countdown layout */
 .target-clock-container {
+
     display:flex;
+
     align-items:center;
-    gap:20px;
+
+    justify-content:center;
+
+    gap:40px;
+
+    flex-wrap:wrap;
+
+}
+
+.big {
+
+    font-size:42px;
+    font-weight:700;
+
+}
+
+
+.small {
+
+    font-size:20px;
+
+    margin-top:8px;
+
+}
+
+
+.label {
+
+    color:#aaa;
+
+    font-size:18px;
+
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.controls select {
+    flex: 1;
+    min-width: 0;
+    font-size: 16px;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.controls button {
+    padding: 10px 20px;
+    white-space: nowrap;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 </style>
@@ -70,12 +161,13 @@ button {
 
 <body>
 
+<div class="widgets">
 
 <div class="widget clock-widget">
 
     <canvas id="analogClock"
-            width="120"
-            height="120">
+            width="220"
+            height="220">
     </canvas>
 
     <div>
@@ -94,20 +186,24 @@ button {
 
 
 
-<h2>Nedtelling</h2>
 
 
-<select id="timeSelect"></select>
 
-<br>
 
-<button onclick="setCountdown()">
-Sett nedtelling
-</button>
 
 
 
 <div class="widget">
+<h2>Nedtelling</h2>
+<div class="controls">
+
+    <select id="timeSelect"></select>
+
+    <button onclick="setCountdown()">
+        Sett
+    </button>
+
+</div>  
 
 <div class="label">
 Hvor lenge er det til
@@ -129,8 +225,8 @@ Hvor lenge er det til
 <div class="target-clock-container">
 
     <canvas id="targetClock"
-            width="140"
-            height="140">
+            width="220"
+            height="220">
     </canvas>
 
     <div class="target-digital">
@@ -149,6 +245,7 @@ Hvor lenge er det til
 
 </div>
 
+</div>
 
 
 <script>
@@ -159,6 +256,45 @@ Hvor lenge er det til
 // --------------------------
 
 let lastTarget = null;
+
+const backgrounds = [
+
+    {
+        name: "This is fine",
+        url: "https://upload.wikimedia.org/wikipedia/commons/4/44/Skibidi_Toilet.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+    },
+    {
+        name: "This is fine",
+        url: "https://www.shutterstock.com/image-vector/words-very-demure-mindful-hand-600w-2517268009.jpg"
+    },
+    {
+        name: "This is fine",
+        url: "https://wl-brightside.cf.tsp.li/resize/1200x630/webp/ea3/7b4/e3d8aa5342a8d3ff85e3bbbe3f.jpg.webp"
+    },
+    {
+        name: "This is fine",
+        url: "https://i.pinimg.com/1200x/c4/e3/45/c4e345e2699aa147b07b6999d34969c7.jpg"
+    }
+
+];
+
+function setRandomBackground(){
+
+    let item =
+        backgrounds[
+            Math.floor(
+                Math.random() * backgrounds.length
+            )
+        ];
+
+
+    document.body.style.backgroundImage =
+        `url("${item.url}")`;
+
+}
+
+
+setRandomBackground();
 
 const numbers=[
 "tolv",
@@ -626,6 +762,8 @@ function drawAnalogClock(){
         Math.PI*2
     );
 
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
     ctx.stroke();
 
 
@@ -633,7 +771,7 @@ function drawAnalogClock(){
     // Numbers 1-12
 
     ctx.font =
-        "14px -apple-system";
+        "20px -apple-system";
 
     ctx.textAlign =
         "center";
@@ -641,8 +779,8 @@ function drawAnalogClock(){
     ctx.textBaseline =
         "middle";
 
-    ctx.strokeStyle = "white";
-    ctx.fillStyle = "white";    
+    ctx.strokeStyle = "pink";
+    ctx.fillStyle = "pink";    
 
 
     for(let i=1;i<=12;i++){
@@ -693,30 +831,30 @@ function drawAnalogClock(){
         minutes/60;
 
 
-
+    ctx.strokeStyle = "red";   // iOS system green
     drawHand(
         ctx,
         hours * Math.PI/6,
-        r*0.45,
+        r*0.55,
+        7
+    );
+
+    ctx.strokeStyle = "#30D158";   // iOS system green
+    drawHand(
+        ctx,
+        minutes * Math.PI/30,
+        r*0.73,
         4
     );
 
 
-    drawHand(
-        ctx,
-        minutes * Math.PI/30,
-        r*0.70,
-        3
-    );
-
-
     // Optional seconds hand
-
+    ctx.strokeStyle = "#111166";   // iOS system green
     drawHand(
         ctx,
         seconds * Math.PI/30,
-        r*0.80,
-        1
+        r*0.70,
+        2
     );
 
 
@@ -824,7 +962,7 @@ function drawTargetClock(minutesFromMidnight) {
     // tall
 
     ctx.font =
-        "14px -apple-system";
+        "20px -apple-system";
 
     ctx.textAlign="center";
     ctx.textBaseline="middle";
@@ -941,7 +1079,7 @@ function drawTargetClock(minutesFromMidnight) {
     // tall
 
     ctx.font =
-        "14px -apple-system";
+        "20px -apple-system";
 
     ctx.textAlign="center";
     ctx.textBaseline="middle";
