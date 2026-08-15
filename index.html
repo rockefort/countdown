@@ -198,29 +198,20 @@ button {
 
 <div class="widget">
 <h2>Nedtelling</h2>
-<div class="controls">
-
-    <select id="timeSelect"></select>
-
-    <button onclick="setCountdown()">
-        Sett
-    </button>
-
-</div>  
 
 <div class="label">
 Hvor lenge er det til
 </div>
 
 <div id="target" class="big">
--
+
 </div>
 <hr />
 <div id="remaining" class="small">
--
+
 </div>
 <div id="approximate" class="small">
--
+
 </div>
 
 <hr />
@@ -245,6 +236,17 @@ Hvor lenge er det til
     </div>
 
 </div>
+
+<hr />
+<div class="controls">
+    <h2>Endre nedtelling til</h2>
+    <select id="timeSelect"></select>
+
+    <button onclick="setCountdown()">
+        Sett
+    </button>
+
+</div>  
 
 </div>
 
@@ -512,6 +514,12 @@ function createDropdown(){
         120*60000
     );
 
+    let option = document.createElement("option");
+    option.text = "";
+    option.value = "";
+    document
+    .getElementById("timeSelect")
+    .appendChild(option);
 
     for(
         let d=new Date(start);
