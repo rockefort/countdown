@@ -935,125 +935,9 @@ function drawTargetClock(minutesFromMidnight) {
     ctx.translate(r,r);
 
 
-    //ctx.strokeStyle="white";
-    //ctx.fillStyle="white";
-
-
-    // klokkehus
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        0,
-        r-5,
-        0,
-        Math.PI*2
-    );
-
-    ctx.stroke();
-
-
-
-    // tall
-
-    ctx.font =
-        "20px -apple-system";
-
-    ctx.textAlign="center";
-    ctx.textBaseline="middle";
-
-
-    for(let i=1;i<=12;i++){
-
-        let angle =
-            i*Math.PI/6
-            -
-            Math.PI/2;
-
-
-        ctx.fillText(
-            i,
-            Math.cos(angle)*(r-18),
-            Math.sin(angle)*(r-18)
-        );
-    }
-
-
-
-    let hours =
-        (minutesFromMidnight/60)%12;
-
-
-    let minutes =
-        minutesFromMidnight%60;
-
-
-    ctx.strokeStyle = "red"; 
-    drawHand(
-        ctx,
-        hours*Math.PI/6,
-        r*0.45,
-        4
-    );
-
-    ctx.strokeStyle = "#30D158"; 
-    drawHand(
-        ctx,
-        minutes*Math.PI/30,
-        r*0.7,
-        3
-    );
-
-
-
-    // senter
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        0,
-        4,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-
-    ctx.restore();
-
-}
-
-function drawTargetClock(minutesFromMidnight) {
-
-    const canvas =
-        document.getElementById("targetClock");
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    const r =
-        canvas.width / 2;
-
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    ctx.save();
-
-    ctx.translate(r,r);
-
-
     ctx.strokeStyle="white";
     ctx.fillStyle="white";
+    ctx.lineWidth = 2;
 
 
     // klokkehus
@@ -1111,7 +995,7 @@ function drawTargetClock(minutesFromMidnight) {
         ctx,
         hours*Math.PI/6,
         r*0.45,
-        4
+        7
     );
 
     ctx.strokeStyle = "#30D158"; 
@@ -1119,7 +1003,7 @@ function drawTargetClock(minutesFromMidnight) {
         ctx,
         minutes*Math.PI/30,
         r*0.7,
-        3
+        4
     );
 
 
@@ -1175,6 +1059,12 @@ function animateTargetClock(){
     let endMinutes =
         target.getHours()*60 +
         target.getMinutes();
+
+
+    // if target is before now (past midnight), sweep forward across midnight
+    if (endMinutes < startMinutes) {
+        endMinutes += 1440;
+    }
 
 
 
