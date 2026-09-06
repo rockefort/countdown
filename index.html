@@ -672,18 +672,26 @@ function approximateRemaining(minutes) {
     let hours = Math.floor(minutes / 60);
     let rest = minutes % 60;
 
-    // rund til nærmeste kvarter
-    let quarters = Math.round(rest / 15);
+
+    // 5, 10, 15, 20, 30 og 45 er presise punkter.
+    // På hver side av 30, 45 og 60: "litt mer enn / litt mindre enn".
+    // Midtpunkt mellom 30 og 45 er 37.5, 23 og 31 er symmetriske rundt 30, 38 og 46 rundt 45.
+    let quarters;
+    if (rest < 2.5)          quarters = 0;
+    else if (rest < 7.5)     quarters = 1;   // 5
+    else if (rest < 12.5)    quarters = 2;   // 10
+    else if (rest < 17.5)    quarters = 3;   // 15
+    else if (rest < 22.5)    quarters = 4;   // 20
+    else if (rest < 30)      quarters = 5;   // litt mindre enn en halvtime
+    else if (rest < 30.5)    quarters = 6;   // en halvtime (30)
+    else if (rest < 38)      quarters = 7;   // litt mer enn en halvtime
+    else if (rest < 45)      quarters = 8;   // litt mindre enn tre kvarter
+    else if (rest < 45.5)    quarters = 9;   // tre kvarter (45)
+    else if (rest < 53)      quarters = 10;   // litt mer enn tre kvarter
+    else                     quarters = 11;   // litt mindre enn en time
 
 
-    // 4 kvarter = ny time
-    if (quarters === 4) {
-        hours++;
-        quarters = 0;
-    }
-
-
-    let result = "Ca ";
+    let result = "";
 
 
     if (hours === 1) {
@@ -701,15 +709,47 @@ function approximateRemaining(minutes) {
 
     switch (quarters) {
         case 1:
-            result += "ett kvarter";
+            result += "fem minutter";
             break;
 
         case 2:
-            result += "en halvtime";
+            result += "ti minutter";
             break;
 
         case 3:
+            result += "ett kvarter";
+            break;
+
+        case 4:
+            result += "tjue minutter";
+            break;
+
+        case 5:
+            result += "nesten en halvtime";
+            break;
+
+        case 6:
+            result += "en halvtime";
+            break;
+
+        case 7:
+            result += "litt mer enn en halvtime";
+            break;
+
+        case 8:
+            result += "nesten tre kvarter";
+            break;
+
+        case 9:
             result += "tre kvarter";
+            break;
+
+        case 10:
+            result += "litt mer enn tre kvarter";
+            break;
+
+        case 11:
+            result += "nesten en time";
             break;
     }
 
@@ -719,7 +759,7 @@ function approximateRemaining(minutes) {
     }
 
 
-    return result;
+    return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
 function drawAnalogClock(){
@@ -907,7 +947,6 @@ function drawHand(
     );
 
 }
-
 
 function drawTargetClock(minutesFromMidnight) {
 
