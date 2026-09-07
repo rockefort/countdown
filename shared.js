@@ -73,15 +73,18 @@ function norwegianApproximate(hour, minute) {
     var nxt = hourName(hour + 1);
     if (minute < 3)          return "like over " + hh;
     else if (minute < 7.5)   return "fem minutter over " + hh;
-    else if (minute < 12.5)  return "ti minutter over " + hh;
-    else if (minute < 17.5)  return "ett kvarter over " + hh;
-    else if (minute < 22.5)  return "tjue minutter over " + hh;
+    else if (minute < 12.5)  return "ti over " + hh;
+    else if (minute < 17.5)  return "kvart over " + hh;
+    else if (minute < 22.5)  return "ti på halv " + nxt;
     else if (minute < 30)    return "snart halv " + nxt;
     else if (minute < 30.5)  return "halv " + nxt;
-    else if (minute < 37.5)  return "litt mer enn halv " + nxt;
+    else if (minute < 37.5)  return "fem over halv " + nxt;
+    else if (minute < 40)    return "snart ti over halv " + nxt;
+    else if (minute < 42.5)  return "ti over halv " + nxt;
     else if (minute < 45)    return "snart kvart på " + nxt;
-    else if (minute < 45.5)  return "kvart på " + nxt;
-    else if (minute < 53)    return "litt mer enn kvart på " + nxt;
+    else if (minute < 47.5)  return "kvart på " + nxt;
+    else if (minute < 50)    return "snart ti på " + nxt;
+    else if (minute < 52.5)  return "ti på " + nxt;
     else                        return "snart fem på " + nxt;
 }
 
