@@ -436,3 +436,92 @@ button {
     transform: scale(0.95);
     animation: none;
 }
+
+/* Set clock game styles */
+.setclock-prompt {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin: 16px 0;
+    color: #fff;
+}
+
+.setclock-controls {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.setclock-btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.setclock-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.2);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.setclock-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.1);
+}
+
+.setclock-btn:active {
+    transform: scale(0.9);
+}
+
+.setclock-value {
+    font-size: 42px;
+    font-weight: 700;
+    min-width: 70px;
+    text-align: center;
+}
+
+.setclock-check {
+    font-size: 18px;
+    padding: 14px 48px;
+    border-radius: 16px;
+    background: #f30f67;
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 4px 24px rgba(243,15,103,0.4);
+    transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.2s;
+}
+
+.setclock-check:hover {
+    background: #d90c58;
+    transform: scale(1.06);
+    box-shadow: 0 6px 32px rgba(243,15,103,0.55);
+}
+
+.setclock-check:active {
+    transform: scale(0.95);
+    animation: none;
+}
+
+/* Future time game styles */
+.future-question {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+    color: #fff;
+}

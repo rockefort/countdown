@@ -14,6 +14,8 @@
 <nav class="sidebar">
     <div class="nav-item active" data-page="na" onclick="showPage('na')">Nå</div>
     <div class="nav-item" data-page="quiz" onclick="showPage('quiz')">Quiz</div>
+    <div class="nav-item" data-page="setclock" onclick="showPage('setclock')">Still klokka</div>
+    <div class="nav-item" data-page="future" onclick="showPage('future')">Hva er klokken om?</div>
 </nav>
 
 <div class="content">
@@ -151,11 +153,135 @@ Hvor lenge er det til
 
 </div>
 
+<!-- Page: Still klokka -->
+<div class="page" id="page-setclock">
+
+    <div class="widgets">
+
+        <div class="widget" id="setclock-start">
+            <div class="quiz-start-form">
+                <h2>Still klokka</h2>
+                <div>
+                    <div class="label">Nivå</div>
+                    <div class="level-row" id="setclock-level-row">
+                        <button class="level-btn active" data-level="1">1</button>
+                        <button class="level-btn" data-level="2">2</button>
+                        <button class="level-btn" data-level="3">3</button>
+                        <button class="level-btn" data-level="4">4</button>
+                        <button class="level-btn" data-level="5">5</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Klokke</div>
+                    <div class="mode-row" id="setclock-mode-row">
+                        <button class="mode-btn active" data-mode="analog">Analog</button>
+                        <button class="mode-btn" data-mode="digital">Digital</button>
+                        <button class="mode-btn" data-mode="begge">Begge</button>
+                    </div>
+                </div>
+                <button id="setclock-start-btn">Start</button>
+            </div>
+        </div>
+
+        <div class="widget" id="setclock-active" style="display:none;">
+            <div class="quiz-header">
+                <span id="setclock-level-badge" class="label"></span>
+                <span id="setclock-streak-dots"></span>
+            </div>
+            <div class="setclock-prompt" id="setclock-prompt"></div>
+            <div class="quiz-clock-area" id="setclock-clock-area"></div>
+            <div class="setclock-controls">
+                <div class="setclock-btn-group">
+                    <button id="setclock-hour-up" class="setclock-btn">▲</button>
+                    <div class="setclock-value" id="setclock-hour-value">12</div>
+                    <button id="setclock-hour-down" class="setclock-btn">▼</button>
+                    <div class="label">Time</div>
+                </div>
+                <div class="setclock-btn-group">
+                    <button id="setclock-minute-up" class="setclock-btn">▲</button>
+                    <div class="setclock-value" id="setclock-minute-value">00</div>
+                    <button id="setclock-minute-down" class="setclock-btn">▼</button>
+                    <div class="label">Minutt</div>
+                </div>
+            </div>
+            <button id="setclock-check-btn" class="setclock-check">Sjekk</button>
+        </div>
+
+        <div class="widget quiz-success" id="setclock-success" style="display:none;">
+            <div class="big" style="margin:0;">Bra!</div>
+            <div id="setclock-success-msg" class="small"></div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                <button id="setclock-next-btn" style="font-size:16px;padding:10px 24px;border-radius:10px;background:#f30f67;color:white;border:none;font-weight:600;cursor:pointer;">Neste nivå</button>
+                <button id="setclock-repeat-btn" style="font-size:16px;padding:10px 24px;border-radius:10px;background:rgba(255,255,255,0.15);color:white;border:2px solid #f30f67;font-weight:600;cursor:pointer;">Spill igjen</button>
+                <button id="setclock-level-btn" style="font-size:16px;padding:10px 24px;border-radius:10px;background:rgba(255,255,255,0.15);color:white;border:2px solid #f30f67;font-weight:600;cursor:pointer;">Meny</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Page: Hva er klokken om...? -->
+<div class="page" id="page-future">
+
+    <div class="widgets">
+
+        <div class="widget" id="future-start">
+            <div class="quiz-start-form">
+                <h2>Hva er klokken om?</h2>
+                <div>
+                    <div class="label">Nivå</div>
+                    <div class="level-row" id="future-level-row">
+                        <button class="level-btn active" data-level="1">1</button>
+                        <button class="level-btn" data-level="2">2</button>
+                        <button class="level-btn" data-level="3">3</button>
+                        <button class="level-btn" data-level="4">4</button>
+                        <button class="level-btn" data-level="5">5</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Klokke</div>
+                    <div class="mode-row" id="future-mode-row">
+                        <button class="mode-btn active" data-mode="analog">Analog</button>
+                        <button class="mode-btn" data-mode="digital">Digital</button>
+                        <button class="mode-btn" data-mode="begge">Begge</button>
+                    </div>
+                </div>
+                <button id="future-start-btn">Start</button>
+            </div>
+        </div>
+
+        <div class="widget" id="future-active" style="display:none;">
+            <div class="quiz-header">
+                <span id="future-level-badge" class="label"></span>
+                <span id="future-streak-dots"></span>
+            </div>
+            <div class="quiz-clock-area" id="future-clock-area"></div>
+            <div class="future-question" id="future-question-text"></div>
+            <div class="quiz-options" id="future-options"></div>
+        </div>
+
+        <div class="widget quiz-success" id="future-success" style="display:none;">
+            <div class="big" style="margin:0;">Bra!</div>
+            <div id="future-success-msg" class="small"></div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                <button id="future-next-btn" style="font-size:16px;padding:10px 24px;border-radius:10px;background:#f30f67;color:white;border:none;font-weight:600;cursor:pointer;">Neste nivå</button>
+                <button id="future-repeat-btn" style="font-size:16px;padding:10px 24px;border-radius:10px;background:rgba(255,255,255,0.15);color:white;border:2px solid #f30f67;font-weight:600;cursor:pointer;">Spill igjen</button>
+                <button id="future-level-btn" style="font-size:16px;padding:10px 24px;border-radius:10px;background:rgba(255,255,255,0.15);color:white;border:2px solid #f30f67;font-weight:600;cursor:pointer;">Meny</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 </div>
 
 <script src="shared.js"></script>
 <script src="now.js"></script>
 <script src="quiz.js"></script>
+<script src="setclock.js"></script>
+<script src="futuretime.js"></script>
 
 </body>
 </html>
