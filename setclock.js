@@ -15,22 +15,29 @@ var setclock = {
     active: false
 };
 
+function timeOfDay(h) {
+    if (h >= 0 && h < 6) return "på natten";
+    if (h >= 6 && h < 12) return "om morgenen";
+    if (h >= 12 && h < 18) return "på ettermiddagen";
+    return "på kvelden";
+}
+
 var setclockLevelConfig = {
     1: { label: "Nivå 1 – heltimer",
          minutes: [0],
-         describe: function(h, m) { return hourName(h); } },
+         describe: function(h, m) { return hourName(h) + " " + timeOfDay(h); } },
     2: { label: "Nivå 2 – + halv",
          minutes: [0, 30],
-         describe: function(h, m) { return norwegianForTime(new Date(2026,0,1,h,m)); } },
+         describe: function(h, m) { return norwegianForTime(new Date(2026,0,1,h,m)) + " " + timeOfDay(h); } },
     3: { label: "Nivå 3 – + kvart",
          minutes: [0, 15, 30, 45],
-         describe: function(h, m) { return norwegianForTime(new Date(2026,0,1,h,m)); } },
+         describe: function(h, m) { return norwegianForTime(new Date(2026,0,1,h,m)) + " " + timeOfDay(h); } },
     4: { label: "Nivå 4 – alle 5 min",
          minutes: [0,5,10,15,20,25,30,35,40,45,50,55],
-         describe: function(h, m) { return norwegianForTime(new Date(2026,0,1,h,m)); } },
+         describe: function(h, m) { return norwegianForTime(new Date(2026,0,1,h,m)) + " " + timeOfDay(h); } },
     5: { label: "Nivå 5 – omtrentlig",
          minutes: [2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,26,27,28,29,31,32,33,34,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53],
-         describe: function(h, m) { return norwegianApproximate(h, m); } }
+         describe: function(h, m) { return norwegianApproximate(h, m) + " " + timeOfDay(h); } }
 };
 
 function drawSetClock(canvasId, hour, minute) {
