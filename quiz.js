@@ -190,6 +190,7 @@ function onStreakGoal() {
     document.getElementById("quiz-active").style.display = "none";
     var success = document.getElementById("quiz-success");
     success.style.display = "flex";
+    showConfetti();
 
     var nextBtn = document.getElementById("quiz-next-btn");
     var repeatBtn = document.getElementById("quiz-repeat-btn");

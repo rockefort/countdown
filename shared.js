@@ -139,3 +139,65 @@ function drawHand(ctx, angle, length, width) {
     ctx.stroke();
     ctx.rotate(-(angle - Math.PI / 2));
 }
+
+// --------------------------
+// Confetti-animasjon
+// --------------------------
+
+function showConfetti() {
+    var canvas = document.createElement("canvas");
+    canvas.id = "confetti-canvas";
+    canvas.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;";
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext("2d");
+    var W = canvas.width = window.innerWidth;
+    var H = canvas.height = window.innerHeight;
+
+    var colors = ["#f30f67", "#30D158", "#FFD60A", "#5E5CE6", "#FF9F0A", "#FF375F"];
+    var particles = [];
+
+    for (var i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H - H,
+            w: Math.random() * 10 + 5,
+            h: Math.random() * 6 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 4,
+            vy: Math.random() * 3 + 2,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.2
+        });
+    }
+
+    var start = Date.now();
+
+    function frame() {
+        var elapsed = Date.now() - start;
+        if (elapsed > 2000) {
+            canvas.remove();
+            return;
+        }
+
+        ctx.clearRect(0, 0, W, H);
+
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.rotSpeed;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+        }
+
+        requestAnimationFrame(frame);
+    }
+
+    frame();
+}

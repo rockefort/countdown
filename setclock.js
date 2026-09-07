@@ -223,6 +223,7 @@ function setClockOnStreakGoal() {
     document.getElementById("setclock-active").style.display = "none";
     var success = document.getElementById("setclock-success");
     success.style.display = "flex";
+    showConfetti();
 
     var nextBtn = document.getElementById("setclock-next-btn");
     var repeatBtn = document.getElementById("setclock-repeat-btn");

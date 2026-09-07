@@ -291,6 +291,7 @@ function futureOnStreakGoal() {
     document.getElementById("future-active").style.display = "none";
     var success = document.getElementById("future-success");
     success.style.display = "flex";
+    showConfetti();
 
     var nextBtn = document.getElementById("future-next-btn");
     var repeatBtn = document.getElementById("future-repeat-btn");
